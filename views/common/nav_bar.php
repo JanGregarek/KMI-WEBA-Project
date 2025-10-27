@@ -10,7 +10,7 @@
 
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href=<?= $_SESSION['logged'] ? './logout' : './login' ?>>
+                <a class="nav-link px-3" href=<?= $_SESSION['logged'] ? "./logout" : "./login" ?>>
                     <?= $_SESSION['logged'] ? 'Log out' : 'Log in' ?>
                 </a>
             </div>

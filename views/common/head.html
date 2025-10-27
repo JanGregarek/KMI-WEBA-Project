@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Simple Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="/MVC/visual/bootstrap.css">
+  <link rel="stylesheet" href="/MVC/visual/bootstrap-icons.css">
+</head>
+
+<style>
+  /* some hacks for responsive sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    /* height of navbar */
+  }
+
+  .sidebar-sticky {
+    height: calc(100vh - 48px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  a.disabled-link {
+    pointer-events: none;
+    opacity: 0.6;
+    text-decoration: none;
+  }
+</style>
