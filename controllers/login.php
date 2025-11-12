@@ -3,10 +3,7 @@
     include "views/common/nav_bar.php";
     require_once "models/database.php";
 
-    
     $mysqli = connect_to_db();
-
-
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
         $username = $_POST['username'] ?? null;
@@ -36,7 +33,6 @@
             }
             disconnect($mysqli);
         }
-
         header("Location: " . ($_SESSION['logged'] ? "./dashboard" : "./login"));
         exit;
     }

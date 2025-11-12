@@ -18,6 +18,15 @@ function get_all_users($mysqli)
     return $users;
 }
 
+function get_user($mysqli, $email)
+{
+    $query = $mysqli->prepare("SELECT * FROM registred WHERE email = ?");
+    $query->bind_param("s", $email);
+    $query->execute();
+    $result = $query->get_result();
+    return $result->fetch_assoc();
+}
+
 function get_recently_logged_users($mysqli)
 {
     $res = $mysqli->query("SELECT email FROM logged LIMIT 10");

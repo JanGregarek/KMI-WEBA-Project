@@ -1,4 +1,6 @@
 <?php
+    $base_path = $_SERVER['HTTP_HOST'];
+
     function process_URL()
     {
         $URL = explode('/', $_GET['page'] ?? '');

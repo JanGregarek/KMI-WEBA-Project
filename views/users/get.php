@@ -28,24 +28,44 @@
                         <td><?= htmlspecialchars($user['workplace']) ?></td>
                         <td><?= htmlspecialchars($user['note']) ?></td>
                         <td>
-                            <a href="users/edit/<?= urlencode($user['email']) ?>" 
-                               class="btn btn-primary <?= !$isAdmin ? 'disabled-link' : '' ?>">
-                                <i class="bi bi-pencil"></i>
-                            </a>
+                            <button class="btn btn-primary button--edit" 
+                                    data-action="users/edit/<?= urlencode($user['email']) ?>"
+                                    <?= $isAdmin ? "" : "disabled" ?>>
+                            <i class="bi bi-pencil"></i>
+                            </button>
                         </td>
                         <td>
-                            <a href="users/delete/<?= urlencode($user['email']) ?>" 
-                               class="btn btn-danger <?= !$isAdmin ? 'disabled-link' : '' ?>">
-                                <i class="bi bi-trash"></i>
-                            </a>
+                            <button class="btn btn-danger button--delete" 
+                                    data-action="users/delete/<?= urlencode($user['email']) ?>"
+                                    <?= $isAdmin ? "" : "disabled" ?>>
+                            <i class="bi bi-trash"></i>
+                            </button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
-
-        <?php if ($isAdmin): ?>
-            <a href="users/add" class="btn btn-primary">Add user</a>
-        <?php endif; ?>
     </section>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this user?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="#" id="confirmDelete" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php if ($isAdmin): ?>
+        <a href="users/add" class="btn btn-primary">Add user</a>
+    <?php endif; ?>
 </main>

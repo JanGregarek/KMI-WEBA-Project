@@ -8,42 +8,108 @@
         <form class="row g-3" method="post" action=<?=$router['method']?>>
             <div class="col-md-6">
                 <label class="form-label">First name</label>
-                <input type="text" class="form-control" name="first_name" required>
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    name="first_name"
+                    value="<?= $user['first_name'] ?? "" ?>"
+                    required
+                >
             </div>
             <div class="col-md-6">
                 <label for="inputPassword4" class="form-label">Second name</label>
-                <input type="text" class="form-control" name="second_name" required>
+                <input
+                    type="text"
+                    class="form-control"
+                    name="second_name"
+                    value="<?= $user['second_name'] ?? "" ?>"
+                    require
+                >
             </div>
             <div class="col-12">
                 <label for="inputAddress" class="form-label">Email (login)</label>
-                <input type="email" class="form-control" name="email" required>
+                <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    value="<?= $user['email'] ?? "" ?>"
+                    required
+                >
             </div>
             <div class="col-md-4">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" required>
+                <input
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    required>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Phone</label>
-                <input type="tel" class="form-control" name="phone">
+                <input
+                    type="tel"
+                    class="form-control"
+                    name="phone"
+                    value="<?= $user['phone'] ?? "" ?>"
+                >
             </div>
             <div class="col-md-4">
                 <label class="form-label">Workplace</label>
-                <input type="text" class="form-control" name="workplace">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="workplace"
+                    value="<?= $user['workspace'] ?? "" ?>"
+                >
             </div>
             <div class="col-md-8">
                 <label class="form-label">Note</label>
-                <input type="text" class="form-control" name="note">
+                <input 
+                    type="text"
+                    class="form-control"
+                    name="note"
+                    value="<?= $user['note'] ?? "" ?>"
+                >
             </div>
             <div class="col-md-4">
                 <label class="form-label">Admin</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="admin" value="1">
+                    <input 
+                        class="form-check-input"
+                        type="radio"
+                        name="admin"
+                        value="1"
+                        <?php
+                            if (isset($user))
+                            {
+                                if ($user['admin'] == 1)
+                                {
+                                    echo("checked");
+                                }
+                            }
+                        ?>
+                    >
                     <label class="form-check-label">
                         Yes
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="admin" value="0" checked>
+                    <input 
+                        class="form-check-input"
+                        type="radio"
+                        name="admin"
+                        value="0"
+                        <?php
+                            if (isset($user))
+                            {
+                                if ($user['admin'] == 0)
+                                {
+                                    echo("checked");
+                                }
+                            }
+                            else echo("checked");
+                        ?>
+                    >
                     <label class="form-check-label">
                         No
                     </label>
