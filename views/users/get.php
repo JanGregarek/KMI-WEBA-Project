@@ -12,8 +12,10 @@
                     <th>Phone</th>
                     <th>Workplace</th>
                     <th>Note</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <?php if ($isAdmin): ?>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    <?php endif; ?>
                 </tr>
             </thead>
             <tbody>
@@ -27,20 +29,20 @@
                         <td><?= htmlspecialchars($user['phone']) ?></td>
                         <td><?= htmlspecialchars($user['workplace']) ?></td>
                         <td><?= htmlspecialchars($user['note']) ?></td>
-                        <td>
-                            <button class="btn btn-primary button--edit" 
-                                    data-action="users/edit/<?= urlencode($user['email']) ?>"
-                                    <?= $isAdmin ? "" : "disabled" ?>>
-                            <i class="bi bi-pencil"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger button--delete" 
-                                    data-action="users/delete/<?= urlencode($user['email']) ?>"
-                                    <?= $isAdmin ? "" : "disabled" ?>>
-                            <i class="bi bi-trash"></i>
-                            </button>
-                        </td>
+                        <?php if ($isAdmin): ?>
+                            <td>
+                                <button class="btn btn-primary button--edit" 
+                                        data-action="users/edit/<?= urlencode($user['email']) ?>">
+                                <i class="bi bi-pencil"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger button--delete" 
+                                        data-action="users/delete/<?= urlencode($user['email']) ?>">
+                                <i class="bi bi-trash"></i>
+                                </button>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
