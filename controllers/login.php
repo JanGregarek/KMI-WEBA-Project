@@ -1,11 +1,8 @@
 <?php
-    include "views/common/head.html";
-    include "views/common/nav_bar.php";
-    require_once "models/database.php";
-
-    $mysqli = connect_to_db();
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
+        require_once "models/database.php";
+        $mysqli = connect_to_db();
         $username = $_POST['username'] ?? null;
         $password = $_POST['password'];
 
@@ -38,6 +35,8 @@
     }
     else
     {
+        include "views/common/head.html";
+        include "views/common/nav_bar.php";
         include 'views/login.html';
     }
 ?>

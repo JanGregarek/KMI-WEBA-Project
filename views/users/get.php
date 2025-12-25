@@ -57,10 +57,12 @@
                 <div class="modal-body">
                     Are you sure you want to delete this user?
                 </div>
-                <div class="modal-footer">
+                <form class="modal-footer" id="confirmDelete"
+                    method="post"
+                    action="#">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="#" id="confirmDelete" class="btn btn-danger">Delete</a>
-                </div>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </div>
         </div>
     </div>

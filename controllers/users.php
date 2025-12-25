@@ -1,11 +1,11 @@
 <?php
-    include "views/common/head.html";
-    include "views/common/nav_bar.php";
-    require_once "models/database.php";
-    if ($_SESSION['logged'])
+    if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
-        include 'views/common/nav_menu.php';
+        include "views/common/head.html";
+        include "views/common/nav_bar.php";
+        if ($_SESSION['logged']) include 'views/common/nav_menu.php';
     }
+    require_once "models/database.php";
 
     $isAdmin = $_SESSION['admin'];
     if ($router['method'] == '') {$router['method'] = 'get';}

@@ -13,12 +13,11 @@
         $mysqli = connect_to_db();
         update_user($mysqli, $first_name, $second_name, $email, $phone, $workplace, $note, $password, $admin);
         disconnect($mysqli);
-        header("Location: users");
+        header("Location: ../../users");
         exit();
     }
     else
     {
-        
         include "form.php";
     }
 ?>

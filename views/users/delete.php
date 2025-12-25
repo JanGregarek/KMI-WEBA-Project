@@ -1,5 +1,4 @@
 <?php
-
     $email = $router['params'][0];
     print_r($email);
     $mysqli = connect_to_db();
@@ -7,5 +6,4 @@
     disconnect($mysqli);
     header("Location: ../../users");
     exit();
-
 ?>

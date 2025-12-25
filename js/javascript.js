@@ -1,3 +1,4 @@
+console.log("loaded")
 document.addEventListener("DOMContentLoaded", () => {
   const deleteButtons = document.querySelectorAll(".button--delete");
   const confirmLink = document.getElementById("confirmDelete");
@@ -10,7 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   deleteButtons.forEach(button => {
     button.addEventListener("click", () => {
       const action = button.dataset.action;
-      confirmLink.setAttribute("href", action);
+      console.log(action)
+      console.log("a")
+      confirmLink.setAttribute("action", action);
       deleteModal.show();
     });
   });
