@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a href="./dashboard" class="nav-link <?= $URL === 'dashboard' ? 'active' : 'link-dark' ?>" aria-current="page">
+                <a href="<?= BASE_URL ?>/dashboard" class="nav-link <?= $URL === 'dashboard' ? 'active' : 'link-dark' ?>" aria-current="page">
                     <span class="icon">
                         <i class="bi bi-easel"></i>
                     </span>
@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li class="<?= $URL === 'items' ? 'active' : '' ?>">
-                <a href="./items" class="nav-link <?= $URL === 'items' ? 'active' : 'link-dark' ?>">
+                <a href="<?= BASE_URL ?>/items" class="nav-link <?= $URL === 'items' ? 'active' : 'link-dark' ?>">
                     <span class="icon">
                         <i class="bi bi-card-list"></i>
                     </span>
@@ -18,7 +18,7 @@
                 </a>
             </li>
             <li class="<?= $URL === 'others' ? 'active' : '' ?>">
-                <a href="./others" class="nav-link <?= $URL === 'others' ? 'active' : 'link-dark' ?>">
+                <a href="<?= BASE_URL ?>/others" class="nav-link <?= $URL === 'others' ? 'active' : 'link-dark' ?>">
                     <span class="icon">
                         <i class="bi bi-box"></i>
                     </span>
@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="<?= $URL === 'users' ? 'active' : '' ?>">
-                <a href="./users" class="nav-link <?= $URL === 'users' ? 'active' : 'link-dark' ?>">
+                <a href="<?= BASE_URL ?>/users" class="nav-link <?= $URL === 'users' ? 'active' : 'link-dark' ?>">
                     <span class="icon">
                         <i class="bi bi-person-circle"></i>
                     </span>

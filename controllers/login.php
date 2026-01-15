@@ -1,42 +1,32 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        require_once "models/database.php";
-        $mysqli = connect_to_db();
-        $username = $_POST['username'] ?? null;
-        $password = $_POST['password'];
+        $username = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
 
-        if ($username)
+        if ($username && $password)
         {
-            $query = $mysqli->prepare("SELECT * FROM registred WHERE email = ?");
-            $query->bind_param("s", $username);
-            $query->execute();
-
-            $res = $query->get_result();
-            $row = $res->fetch_assoc() ?? null;
-            if ($row)
+            require_once BASE_PATH . "/models/database.php";
+            $mysqli = connect_to_db();
+            $password_correct = verify_password($mysqli, $username, $password);
+            if ($password_correct)
             {
-                $pass_in_db = $row['password'];
-                if (password_verify($password, $pass_in_db))
-                {
-                    $_SESSION['username'] = $username;
-                    $_SESSION['logged'] = true;
-                    add_logged($mysqli, $username);
-                }
-                if ($row['admin'] === 1)
-                {
-                    $_SESSION['admin'] = true;
-                }
+                $_SESSION['logged'] = true;
+                add_logged($mysqli, $username);
+                $_SESSION['admin'] = is_admin($mysqli, $username);
+                header("Location: " . BASE_URL . "/dashboard");
+            }
+            else
+            {
+                header("Location: " . BASE_URL . "/login");
             }
             disconnect($mysqli);
         }
-        header("Location: " . ($_SESSION['logged'] ? "./dashboard" : "./login"));
         exit;
     }
     else
     {
-        include "views/common/head.html";
-        include "views/common/nav_bar.php";
-        include 'views/login.html';
+        include_commons();
+        include BASE_PATH . "/views/login.html";
     }
 ?>

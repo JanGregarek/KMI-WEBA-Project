@@ -49,6 +49,19 @@
         </table>
     </section>
 
+    <?php if ($isAdmin): ?>
+        <div>
+            <a href="<?= BASE_URL ?>/users/add" class="btn btn-primary">Add user</a>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($_SESSION["action"] != ""): ?>
+        <div id="notification" class="alert alert-success" role="alert">
+            User succssfully <?= $_SESSION["action"] === "add" ? "added" : "edited" ?>.
+        </div>
+        <?php $_SESSION["action"] = ""; ?>
+    <?php endif; ?>
+
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -68,8 +81,5 @@
             </div>
         </div>
     </div>
-
-    <?php if ($isAdmin): ?>
-        <a href="users/add" class="btn btn-primary">Add user</a>
-    <?php endif; ?>
+    
 </main>

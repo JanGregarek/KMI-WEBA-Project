@@ -6,13 +6,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="./administration">simple administration</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="<?= BASE_URL ?>/administration">simple administration</a>
 
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" 
                     <?= $_SESSION['logged'] ? 'id="button--logout" role="button"' : '' ?> 
-                    href="<?= $_SESSION['logged'] ? '#' : './login' ?>"
+                    href="<?= $_SESSION['logged'] ? '#' : BASE_URL . "/login" ?>"
                 >
                     <?= $_SESSION['logged'] ? 'Log out' : 'Log in' ?>
                 </a>

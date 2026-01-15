@@ -1,5 +1,9 @@
 <?php
-    $base_path = $_SERVER['HTTP_HOST'];
+    // pro include / require
+    define('BASE_PATH', __DIR__);
+
+    // pro odkazy v HTML
+    define('BASE_URL', '/KMI-WEBA-Project');
 
     function process_URL()
     {
@@ -15,6 +19,16 @@
                 'method' => $method,
                 'params' => $params];
     }
+
+    function include_commons()
+    {
+        include BASE_PATH . "/views/common/head.html";
+        include BASE_PATH . "/views/common/nav_bar.php";
+        if ($_SESSION['logged'])
+        {
+            include BASE_PATH . "/views/common/nav_menu.php";
+        }
+    }
     
     session_start();
     $_SESSION['logged'] ??= false;
@@ -24,17 +38,18 @@
     
     if (!$router['controller'])
     {
-        include "controllers/dashboard.php";
+        include BASE_PATH . "/controllers/dashboard.php";
     }
     else
     {
-        if (file_exists('controllers/' . $router['controller'] . ".php"))
+        $path = BASE_PATH . "/controllers/" . $router["controller"] . ".php";
+        if (file_exists($path))
         {
-            include "controllers/" . $router['controller'] . ".php";
+            include $path;
         }
         else
         {
-            include "controllers/404.php";
+            include BASE_PATH . "/controllers/404.php";
         }      
     }
 ?>

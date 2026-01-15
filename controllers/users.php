@@ -1,33 +1,82 @@
 <?php
+    $_SESSION["action"] = $_SESSION["action"] ?? "";
+    if ($router['method'] == '') {$router['method'] = 'get';}
+    require_once BASE_PATH . "/models/database.php";
+    $isAdmin = $_SESSION['admin'];
+
     if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
-        include "views/common/head.html";
-        include "views/common/nav_bar.php";
-        if ($_SESSION['logged']) include 'views/common/nav_menu.php';
-    }
-    require_once "models/database.php";
+        include_commons();
 
-    $isAdmin = $_SESSION['admin'];
-    if ($router['method'] == '') {$router['method'] = 'get';}
-    switch ($router['method'])
+        $mysqli = connect_to_db();
+        switch ($router['method'])
+        {
+            case 'get':
+                $users = get_all_users($mysqli);
+                break;
+
+            case 'edit':
+                $user = get_user($mysqli, $router['params'][0]);
+
+                $formTitle = "Edit user";
+                $formId = "edit-form";
+                $formAction = BASE_URL . "/users/edit/" . $user["email"];
+                
+                $_SESSION["action"] = "edit";
+                break;
+            
+            case 'add':
+                $formTitle = "Add user";
+                $formId = "add-form";
+                $formAction = BASE_URL . "/users/add";
+                $user = [
+                    'first_name' => '',
+                    'second_name' => '',
+                    'email' => '',
+                    'phone' => '',
+                    'workplace' => '',
+                    'note' => '',
+                    'admin' => 0,
+                ];
+
+                $_SESSION["action"] = "add";
+                break;
+
+            default:
+                break;
+        }
+        disconnect($mysqli);
+
+        include BASE_PATH . "/views/$router[controller]/$router[method].php";
+    }
+    else if ($_SERVER['REQUEST_METHOD'] === 'POST')
     {
-        case 'get':
-            $mysqli = connect_to_db();
-            $users = get_all_users($mysqli);
-            disconnect($mysqli);
-            break;
+        $mysqli = connect_to_db();
 
-        case 'add':
-            break;
+        $first_name = $_POST['first_name'];
+        $second_name = $_POST['second_name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $workplace = $_POST['workplace'];
+        $note = $_POST['note'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $admin = $_POST['admin'];
 
-        case 'edit':
-            $mysqli = connect_to_db();
-            $user = get_user($mysqli, $router['params'][0]);
-            disconnect($mysqli);
-            break;
+        switch ($router['method'])
+        {
+            case 'add':
+                add_user($mysqli, $first_name, $second_name, $email, $phone, $workplace, $note, $password, $admin);
+                break;
 
-        case 'delete':
-            break;
+            case 'edit':
+                update_user($mysqli, $first_name, $second_name, $email, $phone, $workplace, $note, $password, $admin);
+                break;
+
+            default:
+                break;
+        }
+        disconnect($mysqli);
+        header("Location: " . BASE_URL . "/users");
+        exit();
     }
-    include "views/$router[controller]/$router[method].php";
 ?>

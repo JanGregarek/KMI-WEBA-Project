@@ -1,16 +1,26 @@
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-3 pb-3">
-    <h1 class="pb-3 border-bottom">Log in</h1>
-    <form action="./login" method="post" class="row g-3">
-        <div class="col-md-6">
-            <label for="inputEmail4" class="form-label">Email</label>
-            <input type="text" name="username" class="form-control">
-        </div>
-        <div class="col-md-6">
-            <label for="inputPassword4" class="form-label">Password</label>
-            <input type="password" name="password" class="form-control">
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Log in</button>
-        </div>
-    </form>
+<main class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+    <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="text-center mb-4">Log in</h2>
+
+        <form class="needs-validation" action="<?= BASE_URL ?>/login" method="post" novalidate>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="invalid-feedback">
+                    Please type valid email address.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="invalid-feedback">
+                    Please fill the password.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mb-3">Sign in</button>
+            <a href="<?= BASE_URL ?>/dashboard" class="btn btn-danger w-100 mb-3">Cancel</a>
+        </form>
+    </div>
 </main>

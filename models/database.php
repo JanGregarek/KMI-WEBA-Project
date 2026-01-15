@@ -10,7 +10,6 @@ function disconnect($mysqli)
     $mysqli->close();
 }
 
-
 function get_all_users($mysqli)
 {
     $res = $mysqli->query("SELECT * FROM registred");
@@ -64,6 +63,35 @@ function update_user($mysqli, $first_name, $second_name, $email, $phone, $workpl
     $query->execute();
 }
 
+function verify_password($mysqli, $username, $password)
+{
+    $query = $mysqli->prepare("SELECT password FROM registred WHERE email = ?");
+    $query->bind_param("s", $username);
+    $query->execute();
 
+    $res = $query->get_result();
+    $row = $res->fetch_assoc();
+    if ($row)
+    {
+        $pass_in_db = $row['password'];
+        return password_verify($password, $pass_in_db);
+    }
+    return false;
+}
+
+function is_admin($mysqli, $username)
+{
+    $query = $mysqli->prepare("SELECT admin FROM registred WHERE email = ?");
+    $query->bind_param("s", $username);
+    $query->execute();
+
+    $res = $query->get_result();
+    $row = $res->fetch_assoc();
+    if ($row)
+    {
+        return $row['admin'] === 1;
+    }
+    return false;
+}
 
 ?>
