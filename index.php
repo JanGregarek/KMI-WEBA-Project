@@ -26,7 +26,7 @@
         include BASE_PATH . "/views/common/nav_bar.php";
         if ($_SESSION['logged'])
         {
-            include BASE_PATH . "/views/common/nav_menu.php";
+            include BASE_PATH . "/views/common/nav_menu.html";
         }
     }
     
