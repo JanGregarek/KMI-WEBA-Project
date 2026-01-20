@@ -32,13 +32,13 @@
                         <?php if ($isAdmin): ?>
                             <td>
                                 <button class="btn btn-primary button--edit" 
-                                        data-action="users/edit/<?= urlencode($user['email']) ?>">
+                                        data-action="<?= BASE_URL ?>/users/edit/<?= urlencode($user['email']) ?>">
                                 <i class="bi bi-pencil"></i>
                                 </button>
                             </td>
                             <td>
                                 <button class="btn btn-danger button--delete" 
-                                        data-action="users/delete/<?= urlencode($user['email']) ?>">
+                                        data-action="<?= BASE_URL ?>/users/delete/<?= urlencode($user['email']) ?>">
                                 <i class="bi bi-trash"></i>
                                 </button>
                             </td>

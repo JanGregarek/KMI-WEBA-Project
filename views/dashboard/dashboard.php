@@ -1,7 +1,7 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-3 pb-3">
   <h1 class="pb-3 border-bottom">Dashboard</h1>
 
-  <?php if ($_SESSION['logged']) {include BASE_PATH . "/views/dashboard/logged_users.php";} ?>
+  <?php if ($_SESSION['logged']) {include BASE_PATH . "/views/dashboard/logged_users.html";} ?>
 
   <section class="mt-5">
     <h2>Table example</h2>

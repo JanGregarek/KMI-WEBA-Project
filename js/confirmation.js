@@ -1,22 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
   const deleteButtons = document.querySelectorAll(".button--delete");
-  const confirmLink = document.getElementById("confirmDelete");
+  const confirmButton = document.getElementById("confirmDelete");
   const deleteModalElement = document.getElementById("deleteModal");
 
-  if (!deleteButtons.length || !confirmLink || !deleteModalElement) return;
+  if (!deleteButtons.length || !confirmButton || !deleteModalElement) return;
 
   const deleteModal = new bootstrap.Modal(deleteModalElement);
+  let deleteAction = null;
+  let activeRow = null;
 
   deleteButtons.forEach(button => {
     button.addEventListener("click", () => {
-      const action = button.dataset.action;
-      console.log(action)
-      console.log("a")
-      confirmLink.setAttribute("action", action);
+      deleteAction = button.dataset.action;
+      activeRow = button.closest("tr");
       deleteModal.show();
     });
   });
+
+  confirmButton.addEventListener("click", e => {
+    e.preventDefault();
+
+    if (!deleteAction) return;
+
+    fetch(deleteAction, {method: "POST"})
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      })
+      .then(() => {
+        deleteModal.hide();
+        activeRow?.remove();
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Mazání se nezdařilo");
+      });
+  });
 });
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const logoutButton = document.getElementById("button--logout");
@@ -29,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   logoutButton.addEventListener("click", (event) => {
     event.preventDefault();
-    console.log("Logout button clicked");
     confirmLink.href = "./logout";
 
     logoutModal.show();

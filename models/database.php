@@ -28,7 +28,7 @@ function get_user($mysqli, $email)
 
 function get_recently_logged_users($mysqli)
 {
-    $res = $mysqli->query("SELECT email FROM logged LIMIT 10");
+    $res = $mysqli->query("SELECT * FROM logged");
     $users = $res->fetch_all(MYSQLI_ASSOC);
     return $users;
 }
