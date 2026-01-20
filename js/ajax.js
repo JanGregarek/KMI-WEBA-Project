@@ -1,6 +1,6 @@
 const el = document.getElementById("others-content");
 
-fetch("http://localhost/REST_API/users/get")
+fetch("http://localhost:3000/get")
   .then(r => r.text())
   .then(text => {
     el.textContent = text;
@@ -9,4 +9,3 @@ fetch("http://localhost/REST_API/users/get")
     el.textContent = "Error";
     console.error(err);
   });
-
